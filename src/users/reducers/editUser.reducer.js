@@ -6,10 +6,15 @@
  */
 export default (state, {user}) => {
   const {users} = state;
-  const newUser = Object.assign({}, user, {isNew: false});
 
   return Object.assign({}, state, {
-    users: users.concat(newUser),
+    users: users.map((other) => {
+      if (other.id === user.id) {
+        return user;
+      }
+
+      return other;
+    }),
     currentUser: {name: '', userGroups: [], isNew: true}
   });
 }

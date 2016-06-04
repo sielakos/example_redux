@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
 import liftActionCreateToDispatch from '../../common/helpers/liftActionCreatorToDispatch.helper';
+import selectUser from '../actions/selectUser.action';
+import deleteUser from '../actions/deleteUser.action';
 import UserList from '../components/userList.component';
 
 export function mapStateTopProps({users: {users}}) {
@@ -10,9 +12,8 @@ export function mapStateTopProps({users: {users}}) {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onDeleteUser: () => {
-      //TODO: implement delete user action
-    }
+    onSelectUser: liftActionCreateToDispatch(dispatch, selectUser),
+    onDeleteUser: liftActionCreateToDispatch(dispatch, deleteUser)
   }
 }
 
