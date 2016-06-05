@@ -28,6 +28,7 @@ export default ({onSaveUser, onChangeUserName, onChangeUserGroups, groups, name,
   };
 
   return <form onSubmit={onSubmit}>
+      <span>{isNew ? 'add new user' : 'edit existing user'}</span>
       <input type="text" value={name} onChange={onChangeName} />
       <select multiple={true} value={userGroups.map(({id}) => id)} onChange={onChangeGroups}>
         {

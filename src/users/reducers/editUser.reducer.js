@@ -1,5 +1,6 @@
 /**
- * Simple reducers that adds new user to state
+ * Simple reducers that changes existing user.
+ * Assumption that user has unique id is made.
  *
  * @param state
  * @param user
