@@ -1,0 +1,104 @@
+$light-green: #ceffde;
+$grey: #b4b4ad;
+$dark-grey: darken($grey, 30%);
+$white-light: #f5f5f5;
+$blue: #5d6fdd;
+$red: #dd5451;
+
+html {
+  font-size: 14px;
+}
+
+body {
+  background-color: #ceffde;
+}
+
+.main__section {
+  border: $grey 1px solid;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: $white-light;
+}
+
+.main__section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $dark-grey;
+}
+
+.user {
+  margin: 0.5rem;
+}
+
+.user__name {
+  color: $blue;
+  cursor: pointer;
+}
+
+.user__delete {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: $red;
+}
+
+.user__group {
+  list-style: none;
+}
+
+.form {
+  background: $light-green;
+  border: $grey 1px solid;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.form__title {
+  color: $dark-grey;
+  font-size: 1.3rem;
+}
+
+.form__section {
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.form__label {
+  color: $dark-grey;
+  display: block;
+}
+
+.form__input {
+  width: 50%;
+  border: 1px solid $grey;
+  background-color: $white-light;
+  padding: 0.5rem;
+
+  &:hover {
+    background-color: darken($white-light, 5%);
+  }
+}
+
+.form__btn {
+  @extend .form__input;
+
+  cursor: pointer;
+}
+
+.form__list-position {
+  list-style: none;
+}
+
+.form__remove {
+  @extend .user__delete;
+}
+
+.groups__name {
+  @extend .user__name;
+
+  padding-right: 0.5rem;
+}
+
+.groups__delete {
+  @extend .user__delete;
+}

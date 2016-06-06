@@ -27,16 +27,24 @@ export default ({onSaveUser, onChangeUserName, onChangeUserGroups, groups, name,
     onSaveUser({id, name, userGroups, isNew});
   };
 
-  return <form onSubmit={onSubmit}>
-      <span>{isNew ? 'add new user' : 'edit existing user'}</span>
-      <input type="text" value={name} onChange={onChangeName} />
-      <select multiple={true} value={userGroups.map(({id}) => id)} onChange={onChangeGroups}>
-        {
-          groups.map(({id, name}) => {
-            return <option value={id} key={id}>{name}</option>;
-          })
-        }
-      </select>
-      <button type="submit">save</button>
+  return <form onSubmit={onSubmit} className="form">
+      <div className="form__title">{isNew ? 'Add new user' : 'Edit existing user'}</div>
+      <div className="form__section">
+        <label className="form__label">name: </label>
+        <input className="form__input" type="text" value={name} onChange={onChangeName} />
+      </div>
+      <div className="form__section">
+        <label className="form__label">groups: </label>
+        <select className="form__input" multiple={true} value={userGroups.map(({id}) => id)} onChange={onChangeGroups}>
+          {
+            groups.map(({id, name}) => {
+              return <option value={id} key={id}>{name}</option>;
+            })
+          }
+        </select>
+      </div>
+      <div className="form__section">
+        <button className="form__btn" type="submit">save</button>
+      </div>
     </form>;
 };

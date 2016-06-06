@@ -22,23 +22,36 @@ export default ({onSaveGroup, onChangeName, onAddUser, onRemoveUser, onSelectUse
   };
 
 
-  return <form onSubmit={submit}>
-    <input type="text" value={name} onChange={changeName} /><br />
-    <ul>
-      {
-        members.map(({id, name}) => {
-          return <li key={id}>
-            {name}
-            <button type="button" onClick={createRemoveUserHandler(id)}>&times;</button>
-          </li>;
-        })
-      }
-    </ul><br />
-    <select value={selectedUserId} onChange={selectUser}>
-      {
-        users.map(({id, name}) => <option value={id} key={id}>{name}</option>)
-      }
-    </select>
-    <button type="button" onClick={addUser}>Add User</button>
+  return <form className="form" onSubmit={submit}>
+    <div className="form__title">{isNew ? 'Add group': 'Edit group'}</div>
+    <div className="form__section">
+      <label className="form__label">group name:</label>
+      <input className="form__input" type="text" value={name} onChange={changeName} />
+    </div>
+    <div className="form__section">
+      <label className="form__label">users:</label>
+      <ul>
+        {
+          members.map(({id, name}) => {
+            return <li className="form__list-position" key={id}>
+              {name}
+              <button className="form__remove" type="button" onClick={createRemoveUserHandler(id)}>&times;</button>
+            </li>;
+          })
+        }
+      </ul>
+      <label className="form__label">select user:</label>
+      <select className="form__input" value={selectedUserId} onChange={selectUser}>
+        {
+          users.map(({id, name}) => <option value={id} key={id}>{name}</option>)
+        }
+      </select>
+    </div>
+    <div className="form__section">
+      <button className="form__btn" type="button" onClick={addUser}>add user</button>
+    </div>
+    <div className="form__section">
+      <button className="form__btn" type="submit">save</button>
+    </div>
   </form>;
 };
