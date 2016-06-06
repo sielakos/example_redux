@@ -1,5 +1,6 @@
 /**
- * Makes sure that each user listed as member of group with given id has it on userGroups list
+ * Makes sure that each user listed as member of group with given id has it on userGroups list.
+ * Also removes group from non-member users userGroups list.
  *
  * @param state
  * @param id
@@ -18,13 +19,25 @@ export default (state, {id, name, members}) => {
   
   return Object.assign({}, state, {
     users: users.map((user) => {
-      if (!isMember(user) || hasGroup(user)) {
-        return user;
+      const userIsMember = isMember(user);
+      const userHasGroup = hasGroup(user);
+
+      // Removes group from users that are not members and have group in userGroup list
+      if (!userIsMember && userHasGroup) {
+        return Object.assign({}, user, {
+          userGroups: user.userGroups.filter((group) => group.id !== id)
+        });
       }
 
-      return Object.assign({}, user, {
-        userGroups: user.userGroups.concat({id, name})
-      });
+      // Adds group to user that is member and has not group in its userGroup list
+      if (userIsMember && !userHasGroup) {
+        return Object.assign({}, user, {
+          userGroups: user.userGroups.concat({id, name})
+        });
+      }
+
+      //Returns all other users unchanged
+      return user;
     })
   })
 };

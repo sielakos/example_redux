@@ -1,3 +1,5 @@
+import getDefaultCurrentGroup from '../helpers/getDefaultCurrentGroup.helper';
+
 /**
  * Edit existing groups if found by id.
  * Assumption of unique id is made.
@@ -16,6 +18,6 @@ export default (state, {group}) => {
 
       return other;
     }),
-    currentGroup: {name: '', isNew: true, users: []}
+    currentGroup: getDefaultCurrentGroup()
   });
 };

@@ -1,3 +1,5 @@
+import getDefaultCurrentGroup from '../helpers/getDefaultCurrentGroup.helper';
+
 /**
  * Adds new groups to groups list
  *
@@ -10,6 +12,6 @@ export default (state, {group}) => {
 
   return Object.assign({}, state, {
     groups: groups.concat(group),
-    currentGroup: {name: '', isNew: true, users: []}
+    currentGroup: getDefaultCurrentGroup()
   });
 };

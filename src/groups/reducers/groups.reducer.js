@@ -8,6 +8,7 @@ import changeCurrentGroupName from './changeCurrentGroupName.reducer';
 import selectUser from './selectUser.reducer';
 import addUser from './addUser.reducer';
 import removeUser from './removeUser.reducer';
+import getDefaultCurrentGroup from '../helpers/getDefaultCurrentGroup.helper';
 
 /**
  * Combines small groups reducers into one, based on action.type matching reducer will be run
@@ -31,6 +32,6 @@ const combinedReducer = combineReducersByActionType({
  * @param action
  * @returns {{groups: Array}}
  */
-export default (state = {groups: [], currentGroup: {name: '', isNew: true, members: []}}, action) => {
+export default (state = {groups: [], currentGroup: getDefaultCurrentGroup()}, action) => {
   return combinedReducer(state, action);
 };

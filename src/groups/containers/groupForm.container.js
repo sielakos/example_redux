@@ -1,6 +1,5 @@
 import {connect} from 'react-redux'
 import liftActionCreateToDispatch from '../../common/helpers/liftActionCreatorToDispatch.helper';
-import getGroupMembers from '../helpers/getGroupMembers.helper';
 import addGroup from '../actions/addGroup.action';
 import addUser from '../actions/addUser.action';
 import changeCurrentGroupName from '../actions/changeCurrentGroupName.action';
@@ -12,8 +11,7 @@ import GroupForm from '../components/groupForm.component';
 
 function mapStateTopProps({users: {users}, groups: {currentGroup}}) {
   return Object.assign({}, currentGroup, {
-    users,
-    members: getGroupMembers(currentGroup, users)
+    users
   });
 }
 
@@ -21,11 +19,10 @@ function mapDispatchToProps(dispatch) {
   return {
     onSaveGroup: (group) => {
       const {isNew, name, members} = group;
-      const id = Math.random().toString();
-      const targetGroup = isNew ? {name, id, members, isNew: false} : group;
+      const id = isNew? Math.random().toString() : group.id;
 
-      dispatch(isNew ? addGroup(targetGroup) : editGroup(targetGroup));
-      dispatch(updateUsersForGroup(targetGroup));
+      dispatch(isNew ? addGroup({name, id, isNew: false}) : editGroup({name, id, isNew: false}));
+      dispatch(updateUsersForGroup({id, name, members, isNew: false}));
     },
     onChangeName: liftActionCreateToDispatch(dispatch, changeCurrentGroupName),
     onAddUser: liftActionCreateToDispatch(dispatch, addUser),
